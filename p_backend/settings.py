@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
 ]
-CORS_ALLOWED_ORIGINS = ['https://nm-alpha.vercel.app/']
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'p_backend.urls'
 
